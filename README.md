@@ -10,7 +10,7 @@ A **revised** ACTIVSg200 (`ACTIVSg200r`) synthetic grid (Illinois system) for mu
 	- [`ACTIVSg200r-InitialState.mat`](./ACTIVSg200r-InitialState.mat): initial states of generators (for t=0, day 1), obtained by solving a single-snapshot UC (t=1, day 1).
 	- [`gendata_ACTIVSg200r.mat`](./gendata_ACTIVSg200r.mat): used in `xgd_ACTIVSg200r.m`, `minup` and `mindown` data.
 - Additional scripts:
-	- [`revise_ACTIVSg200.m`](./revise_ACTIVSg200.m): how additional parameters are chosen, and create the `ACTIVSg200r` case.
+	- [`revise_ACTIVSg200.m`](./revise_ACTIVSg200.m): choose additional generator parameters, then create the `ACTIVSg200r` case.
 	- [`run_SCUC.m`](./run_SCUC.m): a short script of solving SCUC for `ACTIVSg200r` using [MOST](https://matpower.org/doc/manuals/).
 	
 ## About the Original System `ACTIVSg200`
@@ -28,9 +28,10 @@ The following changes have been made to `ACTIVSg200`:
    
    - missing MIN-ON time, MIN-OFF time
    - missing startup/shutdown cost
-   - missing ramping parameters: RAMP_AGC, RAMP_10, RAMP_30, RAMP_Q
+   - missing ramping parameters: RAMP_AGC, RAMP_10, RAMP_30
+   - (RAMP_Q remains missing in `ACTIVSg200r`)
 
-   Range of parameters are from reference [2]. Details of how those parameters are chosen are in [`revise_ACTIVSg200r.m`](./revise_ACTiVSg200r.m)
+   Range of parameters are from reference [2]. Details of how those parameters are chosen are in [`revise_ACTIVSg200r.m`](./revise_ACTiVSg200.m)
 
 ## References
 
@@ -38,4 +39,4 @@ The following changes have been made to `ACTIVSg200`:
 
 [2] T. Xu, A. B. Birchfield, K. M. Gegner, K. S. Shetye, and T. J. Overbye, “Application of large-scale synthetic power system models for energy economic studies,” in Proceedings of the 50th Hawaii International Conference on System Sciences, 2017.
 
-Speical thanks to friends and colleagues in Texas A&M University for creating the original system (and many others)!
+Speical thanks to friends and colleagues at Texas A&M University for creating the original system (and many others)!
