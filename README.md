@@ -1,6 +1,6 @@
 # ACTIVSg200r
 
-A revised ACTIVSg200 (`ACTIVSg200r`) synthetic grid (Illinois system) for Unit Commitment, based on the ACTIVSg200 system by Texas A&M. All in [Matpower](https://matpower.org/) format.
+A **revised** ACTIVSg200 (`ACTIVSg200r`) synthetic grid (Illinois system) for multi-period analysis (e.g., Unit Commitment, look-ahead dispatch, etc), based on the original ACTIVSg200 system created by Texas A&M folks. All in [Matpower](https://matpower.org/) format.
 - System (case/data) files:
 	- [`case_ACTIVSg200r.m`](./case_ACTIVSg200r.m): revised ACTIVSg200 casefile, with additional ramping parameters and startup/shutdown cost parameters.
 	- [`scenarios_ACTIVSg200.m`](./scenarios_ACTIVSg200.m): load profiles of 365 days in year 2017, (identical to the data in the original `ACTIVSg200` system).
@@ -37,3 +37,5 @@ The following changes have been made to `ACTIVSg200`:
 [1] A. B. Birchfield; T. Xu; K. M. Gegner; K. S. Shetye; T. J. Overbye, “[Grid Structural Characteristics as Validation Criteria for Synthetic Networks](https://urldefense.proofpoint.com/v2/url?u=http-3A__ieeexplore.ieee.org_document_7725528_&d=DwMFAg&c=8hUWFZcy2Z-Za5rBPlktOQ&r=BaZP1q9WdgzAzUtYfK1vHbhZiO0i6RX2AEHJekfHTdI&m=9Bcj8G73DDdx0c3ZTxV6CFrGxmHkzlDHNJ4K5zXn7UU&s=KyLZLQql3Eo5C0fRRizk1gPXh7uPgn7I9kvMcTQD9OU&e=),”  in *[IEEE Transactions on Power Systems](http://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=59),* vol. 32, no. 4, pp. 3258-3265, July 2017.
 
 [2] T. Xu, A. B. Birchfield, K. M. Gegner, K. S. Shetye, and T. J. Overbye, “Application of large-scale synthetic power system models for energy economic studies,” in Proceedings of the 50th Hawaii International Conference on System Sciences, 2017.
+
+Speical thanks to friends and colleagues in Texas A&M University for creating the original system (and many others)!
