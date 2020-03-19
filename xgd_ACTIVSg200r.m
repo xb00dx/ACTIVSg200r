@@ -1,10 +1,9 @@
 function xgd_table = xgd_ACTIVSg200r(mpc)
-%XGD_ACTIVSg200r  Example xGenData table for stochastic unit commitment.
+%XGD_ACTIVSg200r    Additional Generator Data for case_ACTIVSg200r
 % 
-%   Additional Generator Data for case_ACTIVSg200r
-%   See modify_ACTIVSg200.m for more details about settings
+%   See revise_ACTIVSg200.m for more details about settings
 %   Parameters are based on [1].
-%   See  for more infor about ACTIVSg200m.
+%   See https://github.com/xb00dx/ACTIVSg200r for more infor about ACTIVSg200r.
 % 
 % References
 %   [1] T. Xu, A. B. Birchfield, K. M. Gegner, K. S. Shetye, and T. J. Overbye,

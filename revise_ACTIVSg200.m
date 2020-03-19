@@ -9,6 +9,8 @@ clear; clc; close all;
 %   missing ramping parameters: RAMP_AGC, RAMP_10, RAMP_30, RAMP_Q
 % range of parameters are from reference [1]
 % 
+%   See https://github.com/xb00dx/ACTIVSg200r for more infor about ACTIVSg200r.
+%
 % References
 % [1] T. Xu, A. B. Birchfield, K. M. Gegner, K. S. Shetye, and T. J. Overbye,
 %   “Application of large-scale synthetic power system models for energy 

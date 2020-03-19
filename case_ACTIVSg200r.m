@@ -1,5 +1,54 @@
 function mpc = case_ACTIVSg200r
-%CASE_ACTIVSG200R
+%CASE_ACTIVSG200R  A revised Synthetic Illinois 200-bus power system model.
+%
+%	The following changes have been made to the original system (case_ACTIVSg200)
+% 	1.  assign values of ZONE to BUS_AREA of mpc.bus
+%	2.  adding the following missing parameters
+%		- missing MIN-ON time, MIN-OFF time
+%		- missing startup/shutdown cost
+%		- missing ramping parameters: RAMP_AGC, RAMP_10, RAMP_30, RAMP_Q
+%	Range of parameters are from reference [2].
+%	Details of how those parameters are chosen are in `./revise_ACTiVSg200r.m`
+%	See https://github.com/xb00dx/ACTIVSg200r for more infor about ACTIVSg200r.
+%
+%  	Created by X. Geng (03/14/2020)
+% 
+%   This file is created for MOST.
+%
+% More info From the original case_ACTIVSg200.m:
+%   This is an entirely synthetic 200 bus case, geographically situated
+%   in the central part of the US state of Illinois. The case is
+%   designed with a 230 and 115 kV transmission network to serve
+%   a load that roughly mimics the actual population of its geographic
+%   footprint. The synthetic transmission system was designed by
+%   algorithms described in [1] to be statistically similar to actual
+%   transmission system models but without modeling any actual lines.
+%
+%   When publishing results based on this data, please cite:
+%
+%   [1] A.B. Birchfield, T. Xu, K.M. Gegner, K.S. Shetye, T.J. Overbye,
+%       "Grid Structural Characteristics as Validation Criteria for
+%       Synthetic Networks," IEEE Transactions on Power Systems,
+%       vol. 32, no. 4, pp. 3258-3265, July 2017.
+%       DOI: 10.1109/TPWRS.2016.2616385
+%
+%   This is a synthetic power system model that does not represent the
+%   actual grid. It was developed as part of the US ARPA-E GRID DATA
+%   research project and contains no CEII.
+%
+%   One-line diagrams and other data formats available at:
+%       https://electricgrids.engr.tamu.edu
+%
+%   May 16, 2017
+%   Created from ACTIV_SG_200.pwb, saved by
+%   PowerWorld Simulator, version 20 Beta, build date May 19, 2017,
+%   then by MATPOWER 6.
+%
+%   MATPOWER
+%   Copyright (c) 2017 by A.B. Birchfield, T. Xu, K.M. Gegner, K.S. Shetye,
+%   and T.J. Overbye
+%   Licensed under the Creative Commons Attribution 4.0 International license,
+%   http://creativecommons.org/licenses/by/4.0/
 
 %% MATPOWER Case Format : Version 2
 mpc.version = '2';

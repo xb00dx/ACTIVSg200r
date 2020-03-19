@@ -1,14 +1,13 @@
 clear; clc; close all;
 
+%% Run SCUC for the revised ACTIVSg200 system (`case_ACTIVSg200r.m`)
+%   Using GUROBI as solver
+%   See https://github.com/xb00dx/ACTIVSg200r for more infor about ACTIVSg200r.
+%   Created by X. Geng (03/14/2020)
+
 define_constants;
 casename = 'case_ACTIVSg200r';
-% casepath = '../system/ACTIVSg200/';
-
-%% Raw Settings
-% mpc = loadcase([casepath,casename]);
-% xgd = loadxgendata([casepath,'xgd_ACTIVSg200r'], mpc);
-% scenarios = scenarios_ACTIVSg200; % get a change table
-% load([casepath,'scenarios.mat']); % exactly the same data as `scenarios_ACTIVSg200.m`
+casepath = './';
 
 mpc = loadcase(casename);
 xgd = loadxgendata('xgd_ACTIVSg200r', mpc);
@@ -31,27 +30,16 @@ mpopt = mpoption(mpopt, 'gurobi.threads', 4);
 mpopt = mpoption(mpopt, 'gurobi.opts.MIPGap', 1e-2); % gap <= 1%
 % mpopt = mpoption(mpopt, 'gurobi.opts.MIPGapAbs', 0);
 mpopt = mpoption(mpopt, 'most.skip_prices', 1); % no price computation for UC
-% mpopt = mpoption(mpopt, 'most.grb_opt.timelimit',60); % time-limit = 60 seconds
+% mpopt = mpoption(mpopt, 'gurobi.opts.timeLimit',60*20); % time-limit = 20 minutes
 mpopt = mpoption(mpopt,'most.uc.run',1); % perform UC regardless of mdo.UC.CommitKey
-% have_linelimit = 1; % 0:w/o-network; 1:w/-network,w/o-contingecy; 2: w/-network, w/-contingency
 mpopt = mpoption(mpopt,'most.dc_model', 1); % consider DC line flow constraints
 
 f_uc = figure;
-% error_list = [];
-% input
-settings(1).area_load = zeros(na,nt);
-% output
-results(1).dispatch = zeros(ng,nt); results(1).commitment = zeros(ng,nt);
-% results(1).flow = zeros(nl,nt);
-results(1).obj = -1;
-results(1).solver_output = [];
-results(1).mdo = []; % save everything just in case
 for day = 1:ns
     % generate load profiles
     indices = (1:nt*na) + (day-1)*nt*na;
     load_data = scenarios(indices, end); % last column: loads of 6 areas
-    area_load1 = reshape(load_data, na, nt)'; % nt-by-na matrix
-    area_load1 = area_load1;
+    area_load = reshape(load_data, na, nt)'; % nt-by-na matrix
     profiles = struct( ...
         'type', 'mpcData', ...
         'table', CT_TAREALOAD, ...
@@ -59,7 +47,7 @@ for day = 1:ns
         'col', CT_LOAD_ALL_P, ...
         'chgtype', CT_REP, ...
         'values', [] );
-    profiles.values(:, 1, :) = area_load1;
+    profiles.values(:, 1, :) = area_load;
     
     % Construct MOST struct
     mdi = loadmd(mpc, nt, xgd, [], [], profiles);
@@ -85,40 +73,7 @@ for day = 1:ns
     plot_uc(mdo);
 %     catch
 %         error_list = [error_list, t];
+%         disp(['sth wrong on day ',num2str(day)]);
 %     end
-    
-    % save results
-    results(day).dispatch = mdo.results.ExpectedDispatch;
-    results(day).commitment = mdo.UC.CommitSched;
-%     results(1).flow = zeros(nl,nt);
-    results(day).obj = mdo.results.f;
-    results(day).solver_output = mdo.QP.output; % all information, gap, bounds, status, itercount
-    results(day).mdo = mdo;
-    
-    settings(day).area_load = squeeze(profiles.values)';
-    settings(day).cost = mpc.gencost(:,end-1);
 end
 
-
-%% save results
-% output
-% optimal solution
-    % commitment ns.(ng-nt)
-    % dispatch ns.(ng-nt)
-    % line flow ns.(nl-nt)
-    % obj value ns.(1)
-    % obj break down ns.(no-nt) (not yet)
-    % critical contingency (not yet)
-% quality of solution:
-    % computation time, gap, lower bound
-    % all in results(day).solver_output
-% input
-% (area)load sceanrios ns-nd-nt
-% cost cofficients ns-ng-nt
-
-
-% info = 'case ACTIVSg200r: no network considered, no contingencies considered. GUROBI solves till gap <= 1%';
-% save('ACTIVSg200r-results-NoNetwork.mat','info', 'results','settings');
-
-info = 'case ACTIVSg200r: DC network is being considered, no contingencies considered. GUROBI solves till gap <= 1%';
-save('ACTIVSg200r-results-NoCont.mat','info', 'results','settings');

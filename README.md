@@ -2,16 +2,16 @@
 
 A revised ACTIVSg200 (`ACTIVSg200r`) synthetic grid (Illinois system) for Unit Commitment, based on the ACTIVSg200 system by Texas A&M. All in [Matpower](https://matpower.org/) format.
 - System (case/data) files:
-	- [`case_ACTIVSg200r.m`](./system/case_ACTIVSg200r.m): revised ACTIVSg200 casefile, with additional ramping parameters and startup/shutdown cost parameters.
-	- [`scenarios_ACTIVSg200.m`](./system/scenarios_ACTIVSg200.m): load profiles of 365 days in year 2017, (identical to the data in the original `ACTIVSg200` system).
-	- [`contab_ACTIVSg200.m`](./system/contab_ACTIVSg200.m): contingency table, (identical to the data in the original `ACTIVSg200` system).
-	- [`xgd_ACTIVSg200r.m`](./system/xgd_ACTIVSg200r.m): additional generator data (minup, mindown time, initial status).
-	- [`scenarios.mat`](./system/scenarios.mat): a table saving all scenarios, identical as the `chgtab` matrix in `scenarios_ACTIVSg200.m`.
-	- [`ACTIVSg200r-InitialState.mat`](./system/ACTIVSg200r-InitialState.mat): initial states of generators (for t=0, day 1), obtained by solving a single-snapshot UC (t=1, day 1).
-	- [`gendata_ACTIVSg200r.mat`](./system/gendata_ACTIVSg200r.mat): used in `xgd_ACTIVSg200r.m`, `minup` and `mindown` data.
+	- [`case_ACTIVSg200r.m`](./case_ACTIVSg200r.m): revised ACTIVSg200 casefile, with additional ramping parameters and startup/shutdown cost parameters.
+	- [`scenarios_ACTIVSg200.m`](./scenarios_ACTIVSg200.m): load profiles of 365 days in year 2017, (identical to the data in the original `ACTIVSg200` system).
+	- [`contab_ACTIVSg200.m`](./contab_ACTIVSg200.m): contingency table, (identical to the data in the original `ACTIVSg200` system).
+	- [`xgd_ACTIVSg200r.m`](./xgd_ACTIVSg200r.m): additional generator data (minup, mindown time, initial status).
+	- [`scenarios.mat`](./scenarios.mat): a table saving all scenarios, identical as the `chgtab` matrix in `scenarios_ACTIVSg200.m`.
+	- [`ACTIVSg200r-InitialState.mat`](./ACTIVSg200r-InitialState.mat): initial states of generators (for t=0, day 1), obtained by solving a single-snapshot UC (t=1, day 1).
+	- [`gendata_ACTIVSg200r.mat`](./gendata_ACTIVSg200r.mat): used in `xgd_ACTIVSg200r.m`, `minup` and `mindown` data.
 - Additional scripts:
-	- [`revise_ACTIVSg200.m`](./code/revise_ACTIVSg200.m): how additional parameters are chosen, and create the `ACTIVSg200r` case.
-	- [`run_SCUC.m`](./code/run_SCUC.m): a short script of solving SCUC for `ACTIVSg200r` using [MOST](https://matpower.org/doc/manuals/).
+	- [`revise_ACTIVSg200.m`](./revise_ACTIVSg200.m): how additional parameters are chosen, and create the `ACTIVSg200r` case.
+	- [`run_SCUC.m`](./run_SCUC.m): a short script of solving SCUC for `ACTIVSg200r` using [MOST](https://matpower.org/doc/manuals/).
 	
 ## About the Original System `ACTIVSg200`
 
@@ -30,7 +30,7 @@ The following changes have been made to `ACTIVSg200`:
    - missing startup/shutdown cost
    - missing ramping parameters: RAMP_AGC, RAMP_10, RAMP_30, RAMP_Q
 
-   Range of parameters are from reference [2]. Details of how those parameters are chosen are in [`revise_ACTIVSg200r.m`](./code/revise_ACTiVSg200r.m)
+   Range of parameters are from reference [2]. Details of how those parameters are chosen are in [`revise_ACTIVSg200r.m`](./revise_ACTiVSg200r.m)
 
 ## References
 
