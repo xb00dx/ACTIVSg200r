@@ -31,7 +31,11 @@ The following changes have been made to `ACTIVSg200`:
    - missing ramping parameters: RAMP_AGC, RAMP_10, RAMP_30
    - (RAMP_Q remains missing in `ACTIVSg200r`)
 
-   Range of parameters are from reference [2]. Details of how those parameters are chosen are in [`revise_ACTIVSg200r.m`](./revise_ACTIVSg200.m)
+   range of parameters are from reference [2]. Details of how those parameters are chosen are in [`revise_ACTIVSg200r.m`](./revise_ACTIVSg200.m)
+
+3. change generator costs from quadratic to linear forms (in order to get a mixed integer linear program for SCUC)
+
+4. change some line limits in order to create congestions (the original system has no congestion when solving SCUC)
 
 ## References
 

@@ -36,6 +36,15 @@ mpcm.bus(:, BUS_AREA) = mpc.bus(:, ZONE);
 
 mpcm.gen(:, GEN_STATUS) = 1;
 
+% lowering some line limits to create congestions
+mpcm.branch(175,RATE_A) = 150;
+mpcm.branch(184,RATE_A) = 300;
+mpcm.branch(185,RATE_A) = 300;
+mpcm.branch(189,RATE_A) = 200;
+mpcm.branch(193,RATE_A) = 200;
+mpcm.branch(195,RATE_A) = 250;
+mpcm.branch(236,RATE_A) = 150;
+
 % remove wind generators because no wind profiles were provided
 wind_ind = strcmp(mpc.genfuel, 'wind');
 mpcm.gen(wind_ind,:) = []; mpcm.gencost(wind_ind,:) = [];
