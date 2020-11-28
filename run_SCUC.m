@@ -50,7 +50,8 @@ for day = 1:ns
     profiles.values(:, 1, :) = area_load;
     
     % Construct MOST struct
-    mdi = loadmd(mpc, nt, xgd, [], [], profiles);
+%     mdi = loadmd(mpc, transmat, xgd, [], 'ex_contab', profiles); % WITHOUT contingency
+    mdi = loadmd(mpc, nt, xgd, [], 'contab_ACTIVSg200.m', profiles); % WITH contingency, warning: super slow to construct the problem structure
     
     % Set initial status
     if day == 1
