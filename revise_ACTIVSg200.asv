@@ -174,32 +174,27 @@ for i = 1:length(nu_ind)
 end
 
 % 4. hydro, no hydro in this system
-hydro_ind = find( strcmp(mpcm.genfuel, 'hydro') == 1);
-for i = 1:length(hydro_ind)
-    ig = hydro_ind(i);
-    if mpcm.gen(ig,PMAX) >= 200
-        mpcm.gen(ig,RAMP_AGC) = 15/100 * mpcm.gen(ig,PMAX); % 15% of PMAX(MW) per min
-        mpcm.gencost(ig,STARTUP) = 5 * mpcm.gen(ig,PMAX); % 5$/MW per startup 
-        mpcm.gencost(ig,SHUTDOWN) = 0.5 * mpcm.gen(ig,PMAX); % 0.5$/MW per shutdown
-        min_on(ig) = 1; % 1 hour
-        min_off(ig) = 1; % 1 hour 
-    elseif mpcm.gen(ig,PMAX) >= 100
-        mpcm.gen(ig,RAMP_AGC) = 20 * mpcm.gen(ig,PMAX); % 20% of PMAX(MW) per min
-        mpcm.gencost(ig,STARTUP) = 2.5 * mpcm.gen(ig,PMAX); % 2.5$/MW per startup 
-        mpcm.gencost(ig,SHUTDOWN) = 0.25 * mpcm.gen(ig,PMAX); % 0.25$/MW per shutdown
-        min_on(ig) = 0.5; % 0.5 hour
-        min_off(ig) = 0.5; % 0.5 hour 
+nu_ind = find( strcmp(mpcm.genfuel, 'nuclear') == 1);
+for i = 1:length(nu_ind)
+    ig = nu_ind(i);
+    if mpcm.gen(ig,PMAX) >= 500
+        mpcm.gen(ig,RAMP_AGC) = 0.5/100 * mpcm.gen(ig,PMAX); % 0.5% of PMAX(MW) per min
+        mpcm.gencost(ig,STARTUP) = 1000 * mpcm.gen(ig,PMAX); % 1000$/MW per startup 
+        mpcm.gencost(ig,SHUTDOWN) = 1000 * mpcm.gen(ig,PMAX); % 1000$/MW per shutdown
+    elseif mpcm.gen(ig,PMAX) >= 250
+        mpcm.gen(ig,RAMP_AGC) = 1/100 * mpcm.gen(ig,PMAX); % 1% of PMAX(MW) per min
+        mpcm.gencost(ig,STARTUP) = 1000 * mpcm.gen(ig,PMAX); % 1000$/MW per startup 
+        mpcm.gencost(ig,SHUTDOWN) = 1000 * mpcm.gen(ig,PMAX); % 1000$/MW per shutdown
     elseif mpcm.gen(ig,PMAX) >= 0
-        mpcm.gen(ig,RAMP_AGC) = 25/100 * mpcm.gen(ig,PMAX); % 25% of PMAX(MW) per min
-        mpcm.gencost(ig,STARTUP) = 0 * mpcm.gen(ig,PMAX); % 0$/MW per startup 
-        mpcm.gencost(ig,SHUTDOWN) = 0 * mpcm.gen(ig,PMAX); % 0$/MW per shutdown
-        min_on(ig) = 0; % 0 hour
-        min_off(ig) = 0; % 0 hour 
+        mpcm.gen(ig,RAMP_AGC) = 5/100 * mpcm.gen(ig,PMAX); % 5% of PMAX(MW) per min
+        mpcm.gencost(ig,STARTUP) = 1000 * mpcm.gen(ig,PMAX); % 1000$/MW per startup 
+        mpcm.gencost(ig,SHUTDOWN) = 1000 * mpcm.gen(ig,PMAX); % 1000$/MW per shutdown
     else
         error('something wrong with mpc.gen(ig,PMAX)!');
     end
+    min_on(ig) = nt;
+    min_off(ig) = nt;
 end
-
 % all ramp rates
 mpcm.gen(:,RAMP_10) = mpcm.gen(:,RAMP_AGC)*10; % AGC(MW/min)*10min
 mpcm.gen(:,RAMP_30) = mpcm.gen(:,RAMP_AGC)*30; % AGC(MW/min)*30min
